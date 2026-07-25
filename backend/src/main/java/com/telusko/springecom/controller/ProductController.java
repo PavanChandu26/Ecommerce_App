@@ -3,6 +3,7 @@ package com.telusko.springecom.controller;
 import com.telusko.springecom.model.Product;
 import com.telusko.springecom.service.ProductService;
 import jakarta.annotation.Nullable;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -76,8 +77,15 @@ public class ProductController {
     public ResponseEntity<String> deleteProduct(@PathVariable int id) {
         Product product = productService.getProductById(id);
         if (product != null) {
-            productService.deleteProduct(id);
-            return new ResponseEntity<>("Deleted", HttpStatus.OK);
+            try {
+                productService.deleteProduct(id);
+                return new ResponseEntity<>("Deleted", HttpStatus.OK);
+            } catch (DataIntegrityViolationException e) {
+                return new ResponseEntity<>(
+                    "Cannot delete this product because it is part of an existing order.",
+                    HttpStatus.CONFLICT
+                );
+            }
         } else {
             return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
         }

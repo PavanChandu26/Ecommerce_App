@@ -49,6 +49,8 @@ const Product = () => {
       navigate("/");
     } catch (error) {
       console.error("Error deleting product:", error);
+      const message = error.response?.data || "Error deleting product. Please try again.";
+      toast.error(message);
     }
   };
 
