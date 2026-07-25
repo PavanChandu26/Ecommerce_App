@@ -1,6 +1,8 @@
 package com.telusko.springecom.service;
 
+import com.telusko.springecom.model.OrderItem;
 import com.telusko.springecom.model.Product;
+import com.telusko.springecom.repo.OrderItemRepo;
 import com.telusko.springecom.repo.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,9 @@ public class ProductService {
 
     @Autowired
     private ProductRepo productRepo;
+
+    @Autowired
+    private OrderItemRepo orderItemRepo;
 
     public List<Product> getAllProducts() {
         return productRepo.findAll();
@@ -36,6 +41,8 @@ public class ProductService {
 
 
     public void deleteProduct(int id) {
+        List<OrderItem> relatedItems = orderItemRepo.findByProduct_Id(id);
+        orderItemRepo.deleteAll(relatedItems);
         productRepo.deleteById(id);
     }
 
