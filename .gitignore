@@ -1,0 +1,9 @@
+node_modules/
+dist/
+backend/target/
+backend/bin/
+backend/.idea/
+backend/.settings/
+backend/.factorypath
+backend/.classpath
+backend/.project
