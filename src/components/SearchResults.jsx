@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import unplugged from "../assets/unplugged.png";
 import { toast } from "react-toastify";
 
 const SearchResults = () => {
