@@ -1,5 +1,14 @@
 # React + Vite
 
+
+
+----------------------------- URL = https://magenta-fudge-b9853e.netlify.app/ ----------------------------------------------------------
+
+
+
+to delete orders
+DELETE FROM orders;
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
